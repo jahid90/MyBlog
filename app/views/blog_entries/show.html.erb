@@ -1,0 +1,24 @@
+<h2> <%= @entry.title %> </h2>
+
+<div> <%= @entry.body %> </div>
+
+<div class='actions'>
+	<%= link_to "Edit", edit_blog_entry_path(@entry) %>
+	<%= link_to "Delete", blog_entry_path(@entry), :confirm => "Are you sure?", method: :destroy %>
+</div>
+
+<% @entry.comments.any? do %>
+	<div>
+		What others have to say about this post
+	</div>
+
+	<% @entry.comments.each do |comment| %>
+		<div class="comment">
+			<p class="author"> <%= comment.author %> says: </p>
+			<p class="content"> <%= comment.content %> </p>
+		</div>
+	<% end %>
+
+<% end %>
+
+<%= link_to "Add comment", new_blog_entry_comment_path(@entry) %>
