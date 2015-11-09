@@ -4,8 +4,10 @@
 
 <div class='actions'>
 	<%= link_to "Edit", edit_blog_entry_path(@entry) %>
-	<%= link_to "Delete", blog_entry_path(@entry), :confirm => "Are you sure?", method: :destroy %>
+	<%= button_to "Delete", blog_entry_path(@entry), confirm: "Are you sure?", method: :destroy %>
 </div>
+
+<hr />
 
 <% @entry.comments.any? do %>
 	<div>
@@ -16,9 +18,15 @@
 		<div class="comment">
 			<p class="author"> <%= comment.author %> says: </p>
 			<p class="content"> <%= comment.content %> </p>
+			<%= button_to "Delete", [@entry, comment], confirm: "Are you sure?", method: :delete %>
 		</div>
 	<% end %>
 
 <% end %>
 
-<%= link_to "Add comment", new_blog_entry_comment_path(@entry) %>
+<%= form_for [@entry, Comment.new] do |form| %>
+	<%= form.label :author, "Name: " %> <br />
+	<%= form.text_field :author %> <br />
+	<%= form.text_area :content %> <br />
+	<%= form.submit %>
+<% end %>

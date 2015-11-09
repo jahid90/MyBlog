@@ -1,23 +1,24 @@
 class CommentsController < ApplicationController
 
-	def new
+	before_filter do
 		@entry = BlogEntry.find_by_id(params[:blog_entry_id])
-		@blog_entry_comment = @entry.comments.new
 	end
 
 	def create
-		@comment = Comment.new(params_helper)
-		@entry = @comment.blog_entry_id
-		if @entry.comment.create(@entry)
-			flash[:success] = "Comment added successfully"
-			redirect_to blog_entry_path(@entry)
-		else
-			flash[:warning] = "Something went wrong"
-			render "new"
-		end
+		@comment = @entry.comments.new(params_helper)
+
+		flash[:warning] = "Failed to save comment" unless @comment.save
+
+		redirect_to blog_entry_path(@entry)
 	end
 
-	def update
+	def destroy
+		@entry = BlogEntry.find_by_id(params[:blog_entry_id])
+		comment = Comment.find_by_id(params[:id])
+
+		flash[:warning] = "Could not delete" unless comment.destroy
+		
+		redirect_to blog_entry_path(@entry)
 	end
 
 	private

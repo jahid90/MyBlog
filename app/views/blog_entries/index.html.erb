@@ -14,7 +14,7 @@
 
 		<div class='actions'>
 			<%= link_to "Edit", edit_blog_entry_path(entry) %>
-			<%= link_to "Delete", blog_entry_path(entry), :confirm => "Are you sure?", method: :delete %>
+			<%= button_to "Delete", blog_entry_path(entry), :confirm => "Are you sure?", method: :delete %>
 		</div>
 
 	</div>

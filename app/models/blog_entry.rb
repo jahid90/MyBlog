@@ -1,6 +1,6 @@
 class BlogEntry < ActiveRecord::Base
 	has_many :comments
 
-	validates :title, presence: true
-	validates :body, presence: true
+	validates_presence_of :title
+	validates_presence_of :body
 end

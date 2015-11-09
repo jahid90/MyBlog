@@ -9,8 +9,8 @@ class BlogEntriesController < ApplicationController
 	end
 
 	def create
-		entry = BlogEntry.new(params_helper)
-		if entry.save
+		@entry = BlogEntry.new(params_helper)
+		if @entry.save
 			flash[:success] = "New entry successfully created"
 			redirect_to blog_entries_path
 		else
