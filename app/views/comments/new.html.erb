@@ -1,7 +1,0 @@
-<h2>Add a comment to post #<%= @post.id %></h2>
-
-<%= form_for @comment, url: post_comment_path(@post, @comment), action: :post do |f| %>
-	Name: <%= f.text_field :author %>
-	<%= f.text_area :content %>
-	<%= f.submit %>
-<% end %>
