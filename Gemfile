@@ -12,6 +12,7 @@ gem 'jquery-rails', '~> 4.0', '>= 4.0.5'
 gem 'turbolinks', '~> 2.5', '>= 2.5.3'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'haml', '~> 4.0', '>= 4.0.7'
 
 group :development, :test do
   gem 'byebug', '~> 8.2', '>= 8.2.1'
