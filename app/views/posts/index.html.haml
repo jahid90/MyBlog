@@ -1,10 +1,17 @@
 %h2 Welcome to MyBlog!
 
+- count = 0
 - @posts.each do |post|
-  .post
-    %h3.title
-      = link_to post.title, post_path(post)
-    .body
-      = post.body
+  - if count % 3 == 0
+    .row
 
-= link_to "Add a new post", new_post_path
+  - count += 1
+
+  .col-md-4
+    .post.panel.panel-primary
+      .panel-heading
+        .panel-title= link_to post.title, post_path(post)
+      .panel-body= post.body
+
+.col-md-12
+  = link_to "Add a new post", new_post_path

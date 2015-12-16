@@ -1,19 +1,40 @@
 !!!
 %html
   %head
-    %title MyBlog
+    %title MyBlog - A Fun Blog Implementation
 
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
 
+    -# Material Design Fonts
+    = stylesheet_link_tag    'http://fonts.googleapis.com/css?family=Roboto:300,400,500,700', 'data-turbolinks-track' => true
+    = stylesheet_link_tag    'https://fonts.googleapis.com/icon?family=Material+Icons', 'data-turbolinks-track' => true
+
+    -# Bootstrap Material Design
+    = stylesheet_link_tag    'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.6/css/bootstrap-material-design.min.css', 'data-turbolinks-track' => true
+    = stylesheet_link_tag    'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.6/css/ripples.min.css', 'data-turbolinks-track' => true
+
+    = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.6/js/material.min.js', 'data-turbolinks-track' => true
+    = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.6/js/ripples.min.js', 'data-turbolinks-track' => true
+
   %body
     = render 'layouts/navbar'
 
-    - flash.each do |key, value|
-      %div{class: "alert alert-#{key}"}= value
+    .container
+      - flash.each do |key, value|
+        %div{class: "flash bg-#{key}" }= value
 
-    .container-fluid
+      - if flash.any?
+        :javascript
+          $(".flash").delay(2500).slideUp(2000).hide(1000);
+      
       = yield
       
-    = debug(params) if Rails.env.development?
+    #debug
+      = debug(params) if Rails.env.development?
+
+    :javascript
+      $(function () {
+        $.material.init();
+      });

@@ -1,38 +1,43 @@
-%h2= @post.title
+.post-wrapper
+  .well
 
-%div= @post.body
+    %h2= @post.title
 
-= render 'post_actions'
+    %div= @post.body
 
-%hr/
+  = render 'post_actions'
 
-- if @post.comments.any?
-  %h3
-    What others have to say about this post
-  - @post.comments.each do |comment|
-    .comment
-      %p.author
-        = comment.author
-        says:
-      %p.content
-        = comment.content
-      = link_to "Delete", [@post, comment], confirm: "Are you sure?", method: :delete
-- else
-  %p There are no comments on this post yet
+  %hr/
 
-%hr/
+  .well
+    - if @post.comments.any?
+      %h3
+        What others have to say about this post
+      - @post.comments.each do |comment|
+        .comment
+          %p.author
+            = comment.author
+            says:
+          %p.content
+            = comment.content
+          = link_to "Delete", [@post, comment], confirm: "Are you sure?", method: :delete
+    - else
+      %p There are no comments on this post yet
 
-%p Add a comment
-= form_for [@post, @post.comments.build] do |f|
-  .form-group
-    = f.label :name
-    %br/
-    = f.text_field :author
+  %hr/
 
-  .form-group
-    = f.label :message
-    %br/
-    = f.text_area :content
+  .well
+    %p Add a comment
+    = form_for [@post, @post.comments.build] do |f|
+      .form-group
+        = f.label :name
+        %br/
+        = f.text_field :author
 
-  .form-group
-    = f.submit
+      .form-group
+        = f.label :message
+        %br/
+        = f.text_area :content
+
+      .form-group
+        = f.submit
