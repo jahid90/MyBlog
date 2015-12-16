@@ -1,6 +1,6 @@
-<%= form_for @entry do |f| %>
+<%= form_for @post do |f| %>
 
-	<% @entry.errors.full_messages.each do |message| %>
+	<% @post.errors.full_messages.each do |message| %>
 		<div class="alert alert-warning"	>
 			<%= message %>
 		</div>

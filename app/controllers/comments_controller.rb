@@ -1,30 +1,31 @@
 class CommentsController < ApplicationController
 
-	before_filter do
-		@entry = BlogEntry.find_by_id(params[:blog_entry_id])
-	end
+	before_action :find_post, only: [:create, :destroy]
 
 	def create
-		@comment = @entry.comments.new(params_helper)
+		@comment = @post.comments.build(params_helper)
 
 		flash[:warning] = "Failed to save comment" unless @comment.save
 
-		redirect_to blog_entry_path(@entry)
+		redirect_to post_path(@post)
 	end
 
 	def destroy
-		@entry = BlogEntry.find_by_id(params[:blog_entry_id])
 		comment = Comment.find_by_id(params[:id])
 
-		flash[:warning] = "Could not delete" unless comment.destroy
+		flash[:warning] = "Could not delete comment" unless comment.destroy
 		
-		redirect_to blog_entry_path(@entry)
+		redirect_to post_path(@post)
 	end
 
 	private
 
 		def params_helper
 			params.require(:comment).permit(:author, :content)
+		end
+
+		def find_post
+			@post = Post.find_by_id(params[:post_id])
 		end
 
 end
