@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
 
+  authenticated :user do
+    root 'posts#index', as: "authenticated_root"
+  end
+
+  root "pages#home"
+
   devise_for :users
-  root 'posts#index'
 
   resources :posts do
     resources :comments, except: :index
