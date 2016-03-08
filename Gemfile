@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.1.2'
+ruby '2.1.6'
 
 gem 'rails', '4.2.3'
 gem 'sass-rails', '~> 5.0'
@@ -13,6 +13,7 @@ gem 'turbolinks', '~> 2.5', '>= 2.5.3'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'haml', '~> 4.0', '>= 4.0.7'
+gem 'devise', '~> 3.5', '>= 3.5.6'
 
 group :development, :test do
   gem 'byebug', '~> 8.2', '>= 8.2.1'
