@@ -3,4 +3,6 @@
 = render "form"
 
 .col-md-12
-  = link_to 'Cancel', post_path(@post)
+  = link_to post_path(@post), class: 'btn btn-primary' do
+    %i.glyphicon.glyphicon-arrow-left
+    %span Cancel
