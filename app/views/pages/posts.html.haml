@@ -1,0 +1,19 @@
+%h2 Welcome to MyBlog! Here's a list of all that's happening around here!
+
+- count = 0
+- @posts.each do |post|
+  - if count % 3 == 0
+    .row
+
+  - count += 1
+
+  .col-md-4
+    .post.panel.panel-primary
+      .panel-heading
+        .panel-title= link_to post.title, post_path(post)
+      .panel-body= post.body
+
+.col-md-12
+  = link_to new_post_path, class: 'btn btn-primary', type: 'button' do
+    %i.glyphicon.glyphicon-plus
+    %span New Post
