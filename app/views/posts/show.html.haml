@@ -24,9 +24,13 @@
             %p.author
               = comment.author
               says:
+            - if @is_owner
+              %div.pull-right
+                = link_to [@post, comment], confirm: 'Are you sure?', method: :delete do
+                  %i.glyphicon.glyphicon-trash
             %p.content
               = comment.content
-            = link_to "Delete", [@post, comment], confirm: "Are you sure?", method: :delete
+          %hr/
       - else
         %p There are no comments on this post yet
 
