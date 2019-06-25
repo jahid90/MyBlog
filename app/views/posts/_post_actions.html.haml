@@ -1,9 +1,0 @@
-.actions.center
-  .btn-group.btn-group-justified.btn-group-raised
-    = link_to posts_path, class: 'btn btn-primary' do
-      %i.glyphicon.glyphicon-chevron-left
-    = link_to edit_post_path(@post), class: 'btn btn-primary' do
-      %i.glyphicon.glyphicon-edit
-    - if @is_owner
-      = link_to post_path(@post), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-primary' do
-        %i.glyphicon.glyphicon-trash
