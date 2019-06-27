@@ -1,32 +1,20 @@
-version: '2'
-
-networks:
-    bridge:
-        driver: bridge
+version: '3'
 
 services:
-    db:
-        image: postgres
-        volumes:
-            - "./tmp/db:/var/lib/postgresql/data"
-        environment:
-            POSTGRES_DB: blog
-            POSTGRES_PASSWORD: passbuildword
-        networks:
-            - bridge
     web:
         build: .
         command: bundle exec rails s -p 3000 -b 0.0.0.0
         ports:
             - "3000:3000"
-        depends_on:
-            - db
         volumes:
-            - ".:/usr/src/blog"
+            - ".:/usr/src/site"
         environment:
-            DB_HOST: db
+            DB_HOST: postgres
             DB_USERNAME: postgres
             DB_PASSWORD: password
-            DB_NAME: blog
-        networks:
-            - bridge
+            DB_NAME: shared
+
+networks:
+    default:
+        external:
+            name: db-network
